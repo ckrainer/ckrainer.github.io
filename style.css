@@ -3,16 +3,19 @@ body {
 	font-size: 9pt;
 	text-align: center;
 }
+
 h1 {
 	font-family: 'Bitstream Vera Sans', Helvetica, Arial, sans;
 	font-size: 1.6em;
 	font-weight: bold;
 }
+
 h2 {
 	font-family: 'Bitstream Vera Sans', Helvetica, Arial, sans;
 	font-size: 1.4em;
 	margin-top: 1.4em;
 }
+
 h3 {
 	font-family: 'Bitstream Vera Sans', Helvetica, Arial, sans;
 	font-size: 1.1em;
@@ -20,33 +23,40 @@ h3 {
 	margin: 0px;
 	padding: 0px;
 }
+
 ul {
 	list-style-type: square;
 }
+
 h1#title {
 	margin: 0;
 	padding: 0;
 }
+
 p#subtitle {
 	margin: 0;
 	padding: 0;
 }
+
 div#main {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
 	width: 640px;
 }
+
 div#footer {
 	border-top: 1px dotted #aaaaaa;
 	margin-top: 30px;
 	padding-top: 20px;
 	text-align: center;
 }
+
 img#rob {
 	border: 1px solid black;
 	float: right;
 }
+
 img#valid_xhtml {
 	border: 0;
 }

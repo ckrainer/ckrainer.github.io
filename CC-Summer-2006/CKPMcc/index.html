@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <title>CKWiki | CC-Summer-2006 / CKPMcc</title>
+</head>
+<body>
+<div id="wikitext">
+<h1><a href="http://www.cs.uni-salzburg.at/~ck/content/classes/CC-Summer-2006/index.html">CC-Summer-2006: CKPMcc</a></h1>
+<p><strong>C</strong>lemens <strong>K</strong>rainer &amp; <strong>P</strong>eter <strong>M</strong>&ouml;dlhammer <strong>C</strong>-<strong>C</strong>ompiler
+</p>
+<div class="vspace"></div><h3>Project Team</h3>
+<ul><li><a class="urllink" href="mailto:clemensdaniel.krainer@sbg.ac.at" rel="nofollow">Clemens <strong>Krainer</strong></a>
+</li><li><a class="urllink" href="mailto:peter.moedlhammer@sbg.ac.at" rel="nofollow">Peter <strong>M&ouml;dlhammer</strong></a> <small>(abandoned project on May 29, 2006)</small>
+</li></ul><div class="vspace"></div><h3>Project Description</h3>
+<p>We implement a compiler package that accepts a subset of the C programming language.
+</p>
+<p class="vspace">This package will contain:
+</p><ol><li>a pre-processor that combines source files to compilation units.
+</li><li>a compiler that transforms the compilation units to machine code in object files.
+</li><li>a link editor that combines object files to an executable.
+</li><li>a virtual machine that can load and run these executable files.
+</li></ol><p class="vspace">Our goal is to design and implement a complete compiler that compiles itself and to meet the ProjectRequirements. 
+</p>
+<div class="vspace"></div><h3>Content</h3>
+<ol><li><strong><a href="#IL">Input Language</a></strong>
+</li><li><strong><a href="#PP">Pre-Processor</a></strong>
+</li><li><strong><a href="#CC">Compiler</a></strong>
+</li><li><strong><a href="#LD">Link Editor</a></strong>
+</li><li><strong><a href="#VM">Virtual Machine</a></strong>
+</li><li><strong><a href="#DL">Downloads</a></strong>
+</li><li><strong><a href="#QA">Quality Assurance</a></strong>
+</li><li><strong><a href="#ST">Project Statistics</a></strong>
+</li></ol><div class="vspace"></div><h3>Project Status</h3>
+<ul><li>formal definition of the input language in EBNF     <strong>finished</strong>
+</li><li>design and implementation of the pre-processor      <strong>finished</strong>
+</li><li>design and implementation of the scanner            <strong>finished</strong>
+</li><li>design and implementation of the parser             <strong>finished</strong>
+</li><li>design and implementation of the code generator     <strong>finished</strong>
+</li><li>definition of the output language                   <strong>finished</strong>
+</li><li>design and implementation of the virtual maschine   <strong>finished</strong>
+</li><li>design and implementation of the backend            <strong>finished</strong>
+</li><li>self compilation                                    <strong>in progress</strong>
+</li></ul><div class="vspace"></div><h3><a name="IL" id="IL"></a> 1. Input Language</h3>
+<p>The input language for the compiler is a subset of the C programming 
+language. No new keywords are introduced to ensure C compatibility.
+</p>
+<p class="vspace">The compiler suports:
+</p><ul><li>strong typing
+</li><li>basic data types: void, char, int and bool
+</li><li>composite data types: structs and arrays
+</li><li>pointers and type casts
+</li></ul><p class="vspace">Functions are implemented to support local 
+hiding, i.e. local variables. The compiler supports the corresponding 
+control structures for the keywords if, else, while, break, continue and
+ return. Arbitrarily nested structures are
+supported also. Initialisation of variables and global variables in 
+general are not supported.
+See the document CC-EBNF.pdf for a detailed description of the supported
+ language.
+</p>
+<div class="vspace"></div><h3><a name="PP" id="PP"></a> 2. Pre-Processor</h3>
+<p>The pre-processor transforms source files into compilation units. It 
+works in the same way as the available C pre-processors and provides the
+ usually commands like if, ifdef, defined elsif, endif, include and 
+define. Additionally, the pre-porcessor supports arithmetic and logical 
+expressions, as well as macro substitutions and comment deletion. 
+Function macros are not supported. To help the compiler to find the 
+correct line number and source file, the pre-processor adds line 
+information in the compilation units. The document PP-EBNF.pdf provides a
+ detailed description of the supported pre-processor commands.
+</p>
+<p class="vspace">Status of the pre-processor:
+</p><ul><li>input language definition: <strong>finished</strong>
+</li><li>implementation: <strong>finished</strong>
+</li></ul><div class="vspace"></div><h3><a name="CC" id="CC"></a> 3. Compiler</h3>
+<p>The compiler checks and transforms compilation units into object 
+files for the link editor. The compiler is a recursive descent compiler,
+ but no LL1 type. For parsing the imput language a dynamic look ahead 
+machanism has been implemented that uses a <em>save point</em> concept. By this, <em>save points</em> can be set at arbitrary locations in the token stream and parsing can be reset to such a <em>save point</em>.
+ When reseting to a save point, the code generation rolled back. 
+Directory libc in the distribution package contains the bootstrap code 
+that features the basic string functions and some definitions for file 
+handling. See above for the compiler's imput language.
+</p>
+<p class="vspace">Status of the compiler:
+</p><ul><li>input language definition: <strong>finished</strong>
+</li><li>implementation of the scanner: <strong>finished</strong>
+</li><li>implementation of the parser: <strong>finished</strong>
+</li><li>output of error messages: <strong>finished</strong>
+</li><li>symboltable maintenance: <strong>finished</strong>
+</li><li>implementation of the code generator: <strong>finished</strong>
+</li><li>output of object files: <strong>finished</strong>
+</li></ul><div class="vspace"></div><h3><a name="LD" id="LD"></a> 4. Link Editor</h3>
+<p>The link editor combines object files to an executable program 
+suitable to be executable by the virtual machine. Both, object files and
+ executable use the same file format. By this, it is possible to compile
+ several source files
+separately and link the generated object files to one big object file. 
+The link editor relocates the code segments as well as the data segments
+ and combines them to one common code area along with one common data 
+area. The linker does the link fixups as possible and merges the fix-up 
+chains of in the code segment.
+</p>
+<p class="vspace">Document VM-Specification.pdf describes the object file format in detail.
+</p>
+<p class="vspace">Status of the link editor:
+</p><ul><li>read object files: <strong>finished</strong>
+</li><li>linking procedure: <strong>finished</strong> 
+</li><li>output of executables for the virtual machine: <strong>finished</strong>
+</li></ul><div class="vspace"></div><h3><a name="VM" id="VM"></a> 5. Virtual Machine</h3>
+<p>The design of the virtual machine was essentially inspired by the design of the Java<sup><small>TM</small></sup>
+ virtual machine. It is a stack based machine, implemented in C and 
+features file I/O functionality for opening, reading, writing and 
+closing files as well as allocating and de-allocating memory from heap.
+</p>
+<p class="vspace">The heap is that part of virtual machine memory from 
+which chunks of memory are allocated. The heap is not garbage collected,
+ so allocated blocks have to be freed explicitly. The virtual machine 
+hides the implementation of the functions for memory allocation and 
+de-allocation for two reasons. First, the performance of the code 
+provided by the virtual machine is much higher and second, for easier 
+debugging. Currently the virtual machine manages the heap memory with 
+both, a used and a free list applying the first fit algorithm for memory
+ allocation.
+</p>
+<p class="vspace">Executables may have unresolved symbols, but the 
+virtual machine is not able to dynamically load code at runtime yet. See
+ the CKPMvm virtual machine specification in document 
+VM-Specification.pdf for a detailled description of the instruction set 
+and the CKLF linking file format.
+</p>
+<p class="vspace">Status of the virtual machine:
+</p><ul><li>definition of instruction set:               <strong>finished</strong>
+</li><li>implementation of instruction set:           <strong>finished</strong>
+</li><li>file I/O demo program:                       <strong>finished</strong>
+</li><li>stack call conventions demo program:         <strong>finished</strong>
+</li><li>definition executable file format:           <strong>finished</strong>
+</li><li>implementation of dynamic linking:           <strong>postponed</strong>
+</li><li>implementation of executable program loader: <strong>finished</strong>
+</li></ul><div class="vspace"></div><h3><a name="DL" id="DL"></a> 6. Downloads</h3>
+<table border="0"><tbody>
+<tr><td align="left">EBNF of the Preprocessor:</td><td align="left"><a href="PP-EBNF.pdf">Attach:PP-EBNF.pdf</a></td><td align="center"><small>(2006-07-13)</small></td></tr>
+<tr><td align="left">EBNF of the Compiler:</td><td align="left"><a href="CC-EBNF.pdf">Attach:CC-EBNF.pdf</a></td><td align="center"><small>(2006-07-13)</small></td></tr>
+<tr><td align="left">Virtual Machine Specification:</td><td align="left"><a href="VM-Specification.pdf">Attach:VM-Specification.pdf</a></a></td><td align="center"><small>(2006-04-23)</small></td></tr>
+<tr><td align="left">Complete source code with documentation:</td><td align="left"><a href="CKPMcc-src.tar.gz">Attach:CKPMcc-src.tar.gz</a></td><td align="center"><small>(2006-07-13)</small></td></tr>
+<tr><td align="left">Presentation on 20 June 2006:</td><td align="left"><a href="CKPMcc-slides.pdf">Attach:CKPMcc-slides.pdf</a></td><td align="center"><small>(2006-06-20)</small></td></tr>
+</tbody></table>
+<h3><a name="QA" id="QA"></a> 7. Quality Assurance</h3>
+<p>This project emphasises quality assurance by supporting more than 70 
+test procedures for pre-processor, compiler, linker and virtual machine.
+ All tests can be performed automatically by the make utility.
+</p>
+<h3><a name="ST" id="ST"></a> 8. Current Project Statistics (July 13, 2006)</h3>
+<p>The lines of code do not include header files and are determined by <strong>grep</strong> and <strong>wc</strong> as follows:
+</p>
+<div class="indent">grep '[};]' *.c | wc -l</div><br/>
+</div>
+<table border="0"><tbody><tr><th colspan="3" align="left">Source Code:</th></tr>
+<tr><th align="left">Module</th><th align="center">Lines of Code</th><th align="center">Lines total</th></tr>
+<tr><td align="left">C library</td><td align="right">63</td><td align="right">594</td></tr>
+<tr><td align="left">pre-processor</td><td align="right">1350</td><td align="right">4075</td></tr>
+<tr><td align="left">compiler</td><td align="right">3137</td><td align="right">7181</td></tr>
+<tr><td align="left">link editor</td><td align="right">453</td><td align="right">1228</td></tr>
+<tr><td align="left">virtual machine</td><td align="right">661</td><td align="right">2363</td></tr>
+<tr><th align="left">Total</th><th align="right">5664</th><th align="right">15441</th></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><th colspan="3" align="left">Tests Source Code:</th></tr>
+<tr><th align="left">Module</th><th align="center">Lines of Code</th><th align="center">Lines total</th></tr>
+<tr><td align="left">C library</td><td align="right">108</td><td align="right">594</td></tr>
+<tr><td align="left">pre-processor</td><td align="right">197</td><td align="right">4738</td></tr>
+<tr><td align="left">compiler</td><td align="right">1574</td><td align="right">12941</td></tr>
+<tr><td align="left">link editor</td><td align="right">129</td><td align="right">1414</td></tr>
+<tr><td align="left">virtual machine</td><td align="right">53</td><td align="right">234</td></tr>
+<tr><th align="left">Total</th><th align="right">2061</th><th align="right">19921</th></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><th colspan="3" align="left">Efford in hours</th></tr>
+<tr><td align="left">EBNF</td><td align="right">7</td><td align="right">2%</td></tr>
+<tr><td align="left">C library</td><td align="right">9</td><td align="right">3%</td></tr>
+<tr><td align="left">pre-processor</td><td align="right">24</td><td align="right">7%</td></tr>
+<tr><td align="left">scanner</td><td align="right">9</td><td align="right">3%</td></tr>
+<tr><td align="left">parser</td><td align="right">73</td><td align="right">21%</td></tr>
+<tr><td align="left">code generator</td><td align="right">140</td><td align="right">40%</td></tr>
+<tr><td align="left">link editor</td><td align="right">20</td><td align="right">6%</td></tr>
+<tr><td align="left">virtual machine</td><td align="right">64</td><td align="right">18%</td></tr>
+<tr><th align="left">Total</th><th align="right">346</th><td>&nbsp;</td></tr>
+</tbody></table>
+</div>
+</body></html>

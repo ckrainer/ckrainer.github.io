@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CKWiki | OS-Winter-2006 / BOS</title>
+</head>
+<body>
+	<div id="printhead">
+		<h1 class="pagename">
+			<a
+				href="http://localhost/%7Eclem/pmwiki-2.2.74/pmwiki.php?n=OS-Winter-2006">OS-Winter-2006:
+				BOS</a>
+		</h1>
+	</div>
+	<!--PageText-->
+	<div id="wikitext">
+		<p>
+			<strong>B</strong>asic <strong>O</strong>perating <strong>S</strong>ystem
+		</p>
+		<div class="vspace"></div>
+		<h1>Project Team</h1>
+		<table border="0">
+			<tbody>
+				<tr>
+					<td valign="top">* <a class="urllink"
+						href="mailto:bid-soft@gmx.at" rel="nofollow">Bernhard <strong>Danninger</strong></a>
+					</td>
+					<td valign="top"><span style="font-size: 83%">(0 4 2 2
+							5 9 4)</span></td>
+				</tr>
+				<tr>
+					<td valign="top">* <a class="urllink"
+						href="mailto:clemensdaniel.krainer@sbg.ac.at" rel="nofollow">Clemens
+							<strong>Krainer</strong>
+					</a>
+					</td>
+					<td valign="top"><span style="font-size: 83%">(9 0 2 0
+							1 1 2)</span></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="vspace"></div>
+		<h1>Project Overview</h1>
+		<p>
+			Our goal was to implement a basic operating system that can boot on a
+			real 32 Bit Intel Architecture (IA 32) PC hardware and to meet the <a
+				class="urllink"
+				href="http://cs.uni-salzburg.at/%7Eck/teaching/OS-Winter-2006/"
+				rel="nofollow">course requirements</a>. The operating system is
+			required to include at least some form of concurrency support, memory
+			management, device abstraction and file handling.
+		</p>
+		<p class="vspace">
+			We have implemented a <em>Basic Operating System</em> (BOS) in C for
+			the IA 32 PC platform based on the GeekOS framework. The BOS software
+			contains the implementation of all six GeekOS projects including a
+			user heap, but no access control lists.
+		</p>
+		<div class="vspace"></div>
+		<h1>Highlights of BOS</h1>
+		<ul>
+			<li>loads and runs ELF executalbles</li>
+			<li>virtual memory management with segmentation and paging</li>
+			<li>two runtime switchable paging algorithms</li>
+			<li>two runtime switchable scheduling algorithms</li>
+			<li>single threaded user processes</li>
+			<li>2GB user process address space</li>
+			<li>automatically growing user heap</li>
+			<li>automatically growing user stack</li>
+			<li>automatic ressource deallocation at process termination</li>
+			<li>detection of null pointer references in kernel and user
+				processes</li>
+			<li>named semaphores</li>
+			<li>message queues capable of handling multiple senders and
+				multiple receivers</li>
+			<li>high performance anonymous pipes</li>
+			<li>high level device abstraction via a virtual file system
+				layer</li>
+			<li>low level device abstraction for block devices</li>
+			<li>GosFS: a read and writeable file system up to 4GB disk space
+			</li>
+			<li>PFAT: a read only file system</li>
+			<li>Access Control Lists in GosFS (not finished and not
+				documented yet)</li>
+		</ul>
+		<div class="vspace"></div>
+		<h1>Downloads</h1>
+		<table border="0">
+			<tbody>
+				<tr>
+					<td align="left">Basic Operating System Technical Report:</td>
+					<td align="left"><a rel="nofollow" class="createlinktext"
+						href="http://localhost/%7Eclem/pmwiki-2.2.74/pmwiki.php?n=OS-Winter-2006.BOS?action=upload&amp;upname=bos-report.pdf">Attach:bos-report.pdf</a></td>
+					<td align="center"><small>(2007-02-08)</small></td>
+				</tr>
+				<tr>
+					<td align="left">Complete source code with documentation:</td>
+					<td align="left"><a rel="nofollow" class="createlinktext"
+						href="http://localhost/%7Eclem/pmwiki-2.2.74/pmwiki.php?n=OS-Winter-2006.BOS?action=upload&amp;upname=bos-1.0-src.tar.gz">Attach:bos-1.0-src.tar.gz</a></td>
+					<td align="center"><small>(2007-02-09)</small></td>
+				</tr>
+				<tr>
+					<td align="left">Presentation on 25 January 2007:</td>
+					<td align="left"><a rel="nofollow" class="createlinktext"
+						href="http://localhost/%7Eclem/pmwiki-2.2.74/pmwiki.php?n=OS-Winter-2006.BOS?action=upload&amp;upname=bos.pdf">Attach:bos.pdf</a></td>
+					<td align="center"><small>(2007-02-08)</small></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
